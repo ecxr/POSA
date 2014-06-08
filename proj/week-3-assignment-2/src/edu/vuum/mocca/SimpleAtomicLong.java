@@ -38,6 +38,7 @@ class SimpleAtomicLong
      * @returns The current value
      */
     public long get() {
+    	return 0;
         // TODO - you fill in here
     }
 
@@ -47,6 +48,7 @@ class SimpleAtomicLong
      * @returns the updated value
      */
     public long decrementAndGet() {
+    	return 0;
         // TODO - you fill in here
     }
 
@@ -56,6 +58,7 @@ class SimpleAtomicLong
      * @returns the previous value
      */
     public long getAndIncrement() {
+    	return 0;
         // TODO - you fill in here
     }
 
@@ -65,6 +68,7 @@ class SimpleAtomicLong
      * @returns the previous value
      */
     public long getAndDecrement() {
+    	return 0;
         // TODO - you fill in here
     }
 
@@ -74,6 +78,7 @@ class SimpleAtomicLong
      * @returns the updated value
      */
     public long incrementAndGet() {
+    	return 0;
         // TODO - you fill in here
     }
 }
