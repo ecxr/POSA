@@ -122,14 +122,16 @@ public class PingPongRight {
 
         // Create the ping and pong threads, passing in the string to
         // print and the appropriate SimpleSemaphores.
-        PlayPingPongThread ping = new PlayPingPongThread(/*
-                                                          * TODO - You fill in
-                                                          * here
-                                                          */);
-        PlayPingPongThread pong = new PlayPingPongThread(/*
-                                                          * TODO - You fill in
-                                                          * here
-                                                          */);
+        /*
+         * TODO - You fill in
+         * here
+         */
+        PlayPingPongThread ping = new PlayPingPongThread(finishString, pongSema, pongSema, maxIterations);
+		 /*
+         * TODO - You fill in
+         * here
+         */
+        PlayPingPongThread pong = new PlayPingPongThread(finishString, pongSema, pongSema, maxIterations);
 
         // TODO - Initiate the ping and pong threads, which will call
         // the run() hook method.
@@ -139,7 +141,7 @@ public class PingPongRight {
         // finish.
         throw new java.lang.InterruptedException();
 
-        System.out.println(finishString);
+        //System.out.println(finishString);
     }
 
     /**
