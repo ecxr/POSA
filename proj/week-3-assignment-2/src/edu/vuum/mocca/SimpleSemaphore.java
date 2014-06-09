@@ -18,7 +18,6 @@ public class SimpleSemaphore {
      * Define a ReentrantLock to protect the critical section.
      */
     // TODO - you fill in here
-    // SKTODO: Create lock like from video
     private final ReentrantLock lock;
 
     /**
