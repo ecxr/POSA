@@ -122,7 +122,7 @@ public class SimpleSemaphore {
         // TODO - you fill in here by changing null to the appropriate
         // return value.
 
-        // permits was declared volatile, no no other locking needed.
+        // permits was declared volatile, no other locking needed.
         return permits;
     }
 }
