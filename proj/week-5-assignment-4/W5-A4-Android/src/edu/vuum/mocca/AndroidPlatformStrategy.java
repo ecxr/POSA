@@ -45,7 +45,7 @@ public class AndroidPlatformStrategy extends PlatformStrategy
     /** Do any initialization needed to start a new game. */
     public void begin()
     {
-        /** Reset the CountDownLatch. */
+        /** (Re)initialize the CountDownLatch. */
         // TODO - You fill in here.
     }
 
@@ -69,12 +69,6 @@ public class AndroidPlatformStrategy extends PlatformStrategy
     public void awaitDone()
     {
         // TODO - You fill in here.
-    }
-
-    /** Returns the platform name in a String. */
-    public String platformName() 
-    {
-        return System.getProperty("java.specification.vendor");
     }
 
     /** 
