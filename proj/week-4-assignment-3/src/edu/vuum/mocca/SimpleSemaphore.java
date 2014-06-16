@@ -100,7 +100,7 @@ public class SimpleSemaphore {
     /**
      * Return one permit to the semaphore.
      */
-    void release() {
+    public void release() {
         // TODO - you fill in here.
         // acquires the reentrant lock,
         // increments permits by 1
