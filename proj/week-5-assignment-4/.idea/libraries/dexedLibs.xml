@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="dexedLibs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/W5-A4-Android-Test/bin/dexedLibs/android-support-v4-69b3f3a9f567bee6b84a184771ebdac7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/W5-A4-Android-Test/bin/dexedLibs/robotium-solo-5.1-a43b6c879d34705b06e83b0be77555cc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
