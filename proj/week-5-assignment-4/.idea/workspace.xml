@@ -134,6 +134,7 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager" selected="Android Application.W5-A4-Android">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
