@@ -10,13 +10,7 @@ import java.net.URL;
 import edu.vuum.mocca.R;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Messenger;
-import android.os.RemoteException;
 import android.util.Base64;
 import android.util.Log;
 
@@ -34,102 +28,13 @@ public class DownloadUtils {
     static final String TAG = "DownloadActivity";
     
     /**
-     * The key used to store/retrieve a Messenger extra from a Bundle.
-     */
-	public static final String MESSENGER_KEY = "MESSENGER";
-	
-	/**
-     * The key used to store/retrieve a file's pathname from a Bundle.
-     */
-	public static final String PATHNAME_KEY = "PATHNAME";
-    
-    /**
-     * If you have access to a stable Internet connection for testing
-     * purposes, feel free to change this variable to false so it
-     * actually downloads the image from a remote server.
-     */
+    * If you have access to a stable Internet connection for testing
+    * purposes, feel free to change this variable to false so it
+    * actually downloads the image from a remote server.
+    */
     // TODO - You can change this to the appropriate setting for your
     // environment.
     static final boolean DOWNLOAD_OFFLINE = true;
-    
-    /**
-     * Make an Intent which will start a service if provided as a
-     * parameter to startService().
-     * 
-     * @param context		The context of the calling component
-     * @param service		The class of the service to be
-     *                          started. (For example, ThreadPoolDownloadService.class) 
-     * @param handler		The handler that the service should
-     *                          use to return a result. 
-     * @param uri		The web URL that the service should download
-     * 
-     * This method is an example of the Factory Method Pattern,
-     * because it creates and returns a different Intent depending on
-     * the parameters provided to it.
-     * 
-     * The Intent is used as the Command Request in the Command
-     * Processor Pattern when it is passed to the
-     * ThreadPoolDownloadService using startService().
-     * 
-     * The Handler is used as the Proxy, Future, and Servant in the
-     * Active Object Pattern when it is passed a message, which serves
-     * as the Active Object, and acts depending on what the message
-     * contains.
-     * 
-     * The handler *must* be wrapped in a Messenger to allow it to
-     * operate across process boundaries.
-     */
-    public static Intent makeMessengerIntent(Context context,
-                                             Class<?> service,
-                                             Handler handler,
-                                             String uri) {
-    	Messenger messenger = new Messenger(handler);
-    	
-    	Intent intent = new Intent(context,
-                                   service);
-    	intent.putExtra(MESSENGER_KEY, 
-                        messenger);
-    	intent.setData(Uri.parse(uri));
-    	
-        return intent;
-    }
-
-    /**
-     *	Use the provided Messenger to send a Message to a Handler in
-     *	another process.
-     *
-     * 	The provided string, outputPath, should be put into a Bundle
-     * 	and included with the sent Message.
-     */
-    public static void sendPath (String outputPath,
-                                 Messenger messenger) {
-        Message msg = Message.obtain();
-        Bundle data = new Bundle();
-        data.putString(PATHNAME_KEY,
-                       outputPath);
-        
-        // Make the Bundle the "data" of the Message.
-        msg.setData(data);
-        
-        try {
-            // Send the Message back to the client Activity.
-            messenger.send(msg);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    /**
-     * Download a file to the Android file system, then respond with
-     * the file location using the provided Messenger. 
-     */
-    public static void downloadAndRespond(Context context,
-                                          Uri uri,
-                                          Messenger messenger) {
-    	sendPath(DownloadUtils.downloadFile(context,
-                                            uri),
-                 messenger);
-    }
     
     /**
      * The resource that we write to the file system in offline
