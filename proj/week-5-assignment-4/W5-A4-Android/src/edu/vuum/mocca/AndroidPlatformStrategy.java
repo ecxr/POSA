@@ -59,14 +59,15 @@ public class AndroidPlatformStrategy extends PlatformStrategy
          */
         // TODO - You fill in here.
     	
-    	// SKNOTE: Create runnable, use activity reference to post runnable to UI Thread
-    	// by calling RunOnUiThread
+    	// SKNOTE: Create runnable, use activity reference to post runnable
+        // to UI Thread by calling RunOnUiThread
+
     	Activity act = mActivity.get();
     	if (act != null) {
     		act.runOnUiThread(
     			new Runnable() {
     				public void run() {
-    			        mTextViewOutput.append(outputString+"\n");
+    			        mTextViewOutput.append(outputString + "\n");
     				}
     			});
     	}
@@ -78,8 +79,17 @@ public class AndroidPlatformStrategy extends PlatformStrategy
     public void done()
     {	
         // TODO - You fill in here.
-    	// SKNOTE: could just call RunOnUIThread and pass runnable that decrement counts
-    	mLatch.countDown();
+        Activity act = mActivity.get();
+        if (act != null) {
+            act.runOnUiThread(
+                new Runnable() {
+                    public void run() {
+                        mLatch.countDown();
+                    }
+                });
+        } else {    	
+    	   mLatch.countDown();
+        }
     }
 
     /** Barrier that waits for all the game threads to finish. */

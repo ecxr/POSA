@@ -3,6 +3,7 @@ package edu.vuum.mocca;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Messenger;
 
@@ -59,11 +60,15 @@ public class DownloadIntentService extends IntentService {
     public static Intent makeIntent(Context context,
                                     Handler handler,
                                     String uri) {
-    	// TODO - You fill in here to replace null with a call to the
+    	// XXX TODO - You fill in here to replace null with a call to the
     	// factory method in DownloadUtils that makes a Messenger
     	// Intent with the appropriate parameters.
 
-        return null;
+        return DownloadUtils.makeMessengerIntent(
+                context,
+                DownloadIntentService.class,
+                handler,
+                uri);
     }
 
     /**
@@ -82,9 +87,18 @@ public class DownloadIntentService extends IntentService {
      */
     @Override
     protected void onHandleIntent (Intent intent) {
-        // TODO - You fill in here with a call the appropriate helper
+        // XXX TODO - You fill in here with a call the appropriate helper
         // method from the DownloadUtils class that downloads the uri
         // in the intent and returns the file's pathname using a
         // Messenger who's Bundle key is defined by DownloadUtils.MESSENGER_KEY
+
+        // Extract the Messenger.
+        Messenger messenger = (Messenger)
+                intent.getExtras().get(DownloadUtils.MESSENGER_KEY);
+
+        // Get the URI
+        Uri uri = intent.getData();
+
+        DownloadUtils.downloadAndRespond(getApplicationContext(), uri, messenger);
     }
 }
