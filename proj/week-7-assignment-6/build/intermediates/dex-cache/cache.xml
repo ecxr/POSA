@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="C:\classes\POSA\proj\week-7-assignment-6\app\build\intermediates\pre-dexed\debug\support-v4-19.0.1-4c4b0f0dc609112a770358c8acf5a7de44a5e3e9.jar"
+        jar="C:\Dev\adt-bundle-windows-x86_64-20131030\sdk\extras\android\m2repository\com\android\support\support-v4\19.0.1\support-v4-19.0.1.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="587da9a481ffd341d2fa091704489b89845ddacd"/>
+    <item
+        dex="C:\classes\POSA\proj\week-7-assignment-6\app\build\intermediates\pre-dexed\debug\slf4j-api-1.7.5-efc7ffe17b9c5442152913730ef550a74857839b.jar"
+        jar="C:\classes\POSA\proj\week-7-assignment-6\app\libs\slf4j-api-1.7.5.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="04a1c54e213b8a3ae375b7b0ef95791bcac61c71"/>
+
+</pre-dex-items>

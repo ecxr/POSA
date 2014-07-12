@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/C:/classes/POSA/proj/week-7-assignment-6/app/src/main/res/values-sw600dp/account_preferences.xml -->
+    <eat-comment />
+
+    <bool name="isTablet">false</bool>
+
+</resources>
