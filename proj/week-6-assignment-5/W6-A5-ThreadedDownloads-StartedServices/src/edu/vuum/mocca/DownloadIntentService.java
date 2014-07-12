@@ -99,6 +99,6 @@ public class DownloadIntentService extends IntentService {
         // Get the URI
         Uri uri = intent.getData();
 
-        DownloadUtils.downloadAndRespond(getApplicationContext(), uri, messenger);
+        DownloadUtils.downloadAndRespond(this, uri, messenger);
     }
 }

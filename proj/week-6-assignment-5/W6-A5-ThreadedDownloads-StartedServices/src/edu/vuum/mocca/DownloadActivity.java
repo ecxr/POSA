@@ -120,9 +120,9 @@ public class DownloadActivity extends DownloadBase {
             // DownloadIntentService with the appropriate Intent
             // returned from the makeIntent() factory method.
 
-            intent = DownloadIntentService.makeIntent(getBaseContext(), handler, getUrlString());
-            startService(intent);
             which = "Starting DownloadIntentService";
+            intent = DownloadIntentService.makeIntent(this, handler, getUrlString());
+            startService(intent);
             break;
         
         case R.id.thread_pool_button:
@@ -130,9 +130,9 @@ public class DownloadActivity extends DownloadBase {
             // ThreadPoolDownloadService with the appropriate Intent
             // returned from the makeIntent() factory method.
 
-            intent = ThreadPoolDownloadService.makeIntent(getBaseContext(), handler, getUrlString());
-            startService(intent);
             which = "Starting ThreadPoolDownloadService";
+            intent = ThreadPoolDownloadService.makeIntent(this, handler, getUrlString());
+            startService(intent);
             break;
         
         }

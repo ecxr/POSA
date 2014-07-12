@@ -130,7 +130,7 @@ public class DownloadUtils {
                                             uri),
                  messenger);
     }
-    
+
     /**
      * The resource that we write to the file system in offline
      * mode. Note that this must be the same image that the testing

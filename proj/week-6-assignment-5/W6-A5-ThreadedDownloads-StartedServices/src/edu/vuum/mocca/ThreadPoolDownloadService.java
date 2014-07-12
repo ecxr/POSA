@@ -99,7 +99,8 @@ public class ThreadPoolDownloadService extends Service {
 
         Runnable downloadRunnable = new Runnable() {
             public void run () {
-                DownloadUtils.downloadAndRespond(getApplicationContext(),
+                DownloadUtils.downloadAndRespond(
+                        ThreadPoolDownloadService.this,
                         intent.getData(),
                         (Messenger) intent.getExtras().get(DownloadUtils.MESSENGER_KEY));
             }
