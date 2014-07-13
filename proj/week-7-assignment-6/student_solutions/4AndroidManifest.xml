@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Line 12 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" /> <!-- Line 14 -->
-    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" /> <!-- Line 14 -->
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -30,7 +29,7 @@
         <activity
             android:name="edu.vuum.mocca.ui.ListStoryActivity"
             android:label="@string/title_activity_main" />
-
+        
         <activity android:name="edu.vuum.mocca.ui.LoginActivity">
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" /> <!-- Line 35 -->
@@ -51,14 +50,12 @@
         </activity>
         
         <!-- THIS IS THE SOUND RECORD ACTIVITY -->
-        <!-- SKNOTE: if activity has an intent filter, exported defaults to true!!! -->
-        <!-- SKNOTE: Another way would be to specify that callers MUST have same permission to record audio -->
         <activity
-            android:exported="false"
-            android:permission="android.permission.RECORD_AUDIO"
             android:name="edu.vuum.mocca.ui.SoundRecordActivity"
             android:label="@string/title_activity_sound_record">
-            <!-- Require caller to have capture audio perms -->
+            <intent-filter> 										<!-- Line 56 -->
+             <!--    <action android:name="android.intent.action.TIMEZONE_CHANGED" /> -->
+            </intent-filter>
         </activity>
         
     </application>

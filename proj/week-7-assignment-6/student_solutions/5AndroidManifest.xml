@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="edu.vuum.mocca"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0" 
+    >
     
     <uses-sdk
         android:minSdkVersion="8"
@@ -12,26 +13,29 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Line 12 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" /> <!-- Line 14 -->
-    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" /> <!-- Line 14 -->
 
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!--  uses-permission android:name="android.permission.RECORD_AUDIO" /-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- Line 21 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+      
     
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" 
+        android:permission="android.permission.ACCESS_FINE_LOCATION">
+        
         <activity
             android:name="edu.vuum.mocca.ui.ListStoryActivity"
             android:label="@string/title_activity_main" />
-
-        <activity android:name="edu.vuum.mocca.ui.LoginActivity">
+        
+        <activity android:name="edu.vuum.mocca.ui.LoginActivity" >
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" /> <!-- Line 35 -->
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -39,7 +43,8 @@
         </activity>
         
         <!-- THIS IS THE CREATION ACTIVITY -->
-        <activity android:name="edu.vuum.mocca.ui.CreateStoryActivity" >
+        <activity android:name="edu.vuum.mocca.ui.CreateStoryActivity">
+            
         </activity>
         
         <!-- THIS IS THE SINGLE VIEW ACTIVITY -->
@@ -51,14 +56,16 @@
         </activity>
         
         <!-- THIS IS THE SOUND RECORD ACTIVITY -->
-        <!-- SKNOTE: if activity has an intent filter, exported defaults to true!!! -->
-        <!-- SKNOTE: Another way would be to specify that callers MUST have same permission to record audio -->
         <activity
-            android:exported="false"
-            android:permission="android.permission.RECORD_AUDIO"
             android:name="edu.vuum.mocca.ui.SoundRecordActivity"
-            android:label="@string/title_activity_sound_record">
-            <!-- Require caller to have capture audio perms -->
+            android:label="@string/title_activity_sound_record"
+            android:permission="android.permission.RECORD_AUDIO"
+            >
+             
+            
+            <intent-filter> 										<!-- Line 56 -->
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
         </activity>
         
     </application>
