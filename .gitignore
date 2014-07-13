@@ -16,4 +16,7 @@ Android
 bin
 gen
 slides
-*.loock
+*.lock
+out
+*.iml
+

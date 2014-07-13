@@ -71,12 +71,12 @@ public class DownloadActivity extends DownloadBase {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
             	Log.d(TAG, "ComponentName: " + name);
-                // TODO You fill in here to replace null with a call
+                // XXX TODO You fill in here to replace null with a call
                 // to a generated stub method that converts the
                 // service parameter into an interface that can be
                 // used to make RPC calls to the Service.
 
-                mDownloadCall = null;
+                mDownloadCall = DownloadCall.Stub.asInterface(service);
             }
 
             /**
@@ -104,12 +104,12 @@ public class DownloadActivity extends DownloadBase {
             @Override
 		public void onServiceConnected(ComponentName name,
                                                IBinder service) {
-                // TODO You fill in here to replace null with a call
+                // XXX TODO You fill in here to replace null with a call
                 // to a generated stub method that converts the
                 // service parameter into an interface that can be
                 // used to make RPC calls to the Service.
 
-                mDownloadRequest = null;
+                mDownloadRequest = DownloadRequest.Stub.asInterface(service);
             }
 
             /**
@@ -139,13 +139,19 @@ public class DownloadActivity extends DownloadBase {
              */
             @Override
             public void sendPath(final String imagePathname) throws RemoteException {
-                // TODO - You fill in here to replace null with a new
+                // XXX TODO - You fill in here to replace null with a new
                 // Runnable whose run() method displays the bitmap
                 // image whose pathname is passed as a parameter to
                 // sendPath().  Please use displayBitmap() defined in
                 // DownloadBase.
 
-                Runnable displayRunnable = null;
+                Runnable displayRunnable = new Runnable () {
+                    public void run () {
+                        displayBitmap(imagePathname);
+                    }
+                };
+
+                runOnUiThread(displayRunnable);
             }
         };
      
@@ -160,14 +166,39 @@ public class DownloadActivity extends DownloadBase {
 
     	switch (view.getId()) {
         case R.id.bound_sync_button:
-            // TODO - You fill in here to use mDownloadCall to
+            // XXX TODO - You fill in here to use mDownloadCall to
             // download the image & then display it.
+            if (mDownloadCall != null)
+                try {
+                    Log.d(TAG,
+                            "Invoke the twoway call, which blocks until it gets a reply");
+
+                    // Invoke the twoway call, which blocks until
+                    // it gets a reply.
+                    String results =
+                            mDownloadCall.downloadImage(uri);
+                    displayBitmap(results);
+                } catch (RemoteException e1) {
+                    e1.printStackTrace();
+                }
+
             break;
 
         case R.id.bound_async_button:
-            // TODO - You fill in here to call downloadImage() on
+            // XXX TODO - You fill in here to call downloadImage() on
             // mDownloadRequest, passing in the appropriate Uri and
             // callback.
+            if (mDownloadRequest != null)
+                try {
+                    Log.d(TAG, "Calling oneway non-blocking call");
+
+                    // Invoke the oneway call, which doesn't block.
+                    mDownloadRequest.downloadImage(uri,
+                            mDownloadCallback);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+
             break;
         }
     }
