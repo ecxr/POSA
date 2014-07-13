@@ -21,6 +21,9 @@ public class StorageUtilities {
 	public static final String LOG_TAG = StorageUtilities.class.getCanonicalName();
 	
 	// Constant that denote whether a file should be stored publicly or privately
+    // SKNOTE: It would be much better to use enums here instead of ints, so arbitrary values
+    //         cannot be used
+    // SKNOTE: Default security level (0) should be private!  Otherwise default value 0 is public
 	public static final int SECURITY_PUBLIC = 0; // Line 24
 	public static final int SECURITY_PRIVATE = 1;
 	
@@ -69,6 +72,7 @@ public class StorageUtilities {
 		}
 		
 		// If security is private, store it in the app's private directory.
+        // SKNOTE: We should check for SECURITY_PUBLIC, and default to private, instead of vice versa!
 		if (security == SECURITY_PRIVATE) {
 			storageDir = context.getFilesDir();
 		}

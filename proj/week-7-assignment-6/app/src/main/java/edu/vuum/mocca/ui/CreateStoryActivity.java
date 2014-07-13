@@ -378,8 +378,11 @@ public class CreateStoryActivity extends StoryActivityBase {
 	 * @param location
 	 */
 	public void setLocation(Location location) {
-		
-		Log.d(LOG_TAG, "setLocation =" + location);		// Line 382
+
+        // SKNOTE: Vulnerability on Android 4.1 and earlier: Any app can request permission to read
+        // all logs.  Any sensitive data logged (auth tokens, location, passwords) can be stolen by
+        // a malicious app reading log data.
+		//Log.d(LOG_TAG, "setLocation =" + location);		// Line 382
 		
 		loc = location;
 		double latitude = loc.getLatitude();

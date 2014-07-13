@@ -229,6 +229,7 @@ public class SoundRecordActivity extends Activity {
         super.onCreate(icicle);
         
         //Get the filename to store audio data from the intent used to start this activity
+        // SKNOTE: Attacker passes in filename where audio is stored in the intent.
         mFileName = getIntent().getStringExtra("FILENAME");
         
         //Add our custom buttons to a linear layout
