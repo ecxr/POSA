@@ -3,6 +3,7 @@ package edu.vuum.mocca;
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
@@ -145,13 +146,10 @@ public class DownloadActivity extends DownloadBase {
                 // sendPath().  Please use displayBitmap() defined in
                 // DownloadBase.
 
-                Runnable displayRunnable = new Runnable () {
-                    public void run () {
-                        displayBitmap(imagePathname);
-                    }
-                };
-
-                runOnUiThread(displayRunnable);
+                // SKNOTE: Creating a runnable to display results on UI thread was used twice,
+                // so I refactored the code into displayResultsOnUIThread, defined at the bottom
+                // of this file.  Should go in DownloadBase.java, but we are not submitting that file.
+                displayResultsOnUIThread(imagePathname);
             }
         };
      
@@ -168,19 +166,38 @@ public class DownloadActivity extends DownloadBase {
         case R.id.bound_sync_button:
             // XXX TODO - You fill in here to use mDownloadCall to
             // download the image & then display it.
-            if (mDownloadCall != null)
-                try {
-                    Log.d(TAG,
-                            "Invoke the twoway call, which blocks until it gets a reply");
 
-                    // Invoke the twoway call, which blocks until
-                    // it gets a reply.
-                    String results =
-                            mDownloadCall.downloadImage(uri);
-                    displayBitmap(results);
-                } catch (RemoteException e1) {
-                    e1.printStackTrace();
-                }
+            // SKNOTE: Do this in an AsyncTask or runnable thread to do it in a background
+            // thread, then take the result and display in a UI thread w/ onPostExecute or runOnUIThread
+            // Should be a few lines of code
+            // Prof said to use MakeIntent factory method here, and bind to the service,
+            // but this is done in OnStart()...
+            if (mDownloadCall != null)
+                Log.d(TAG,
+                        "Invoke the twoway call in an AsyncTask");
+
+                new AsyncTask<Uri, Void, String>() {
+
+                    // Download the expanded acronym via a synchronous
+                    // two-way method call, which runs in a background
+                    // thread to avoid blocking the UI thread.
+                    protected String doInBackground(Uri... uri) {
+                        try {
+                            return mDownloadCall.downloadImage(uri[0]);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+                    }
+
+                    // Display the results in the UI Thread.
+                    protected void onPostExecute(final String path) {
+                        // SKNOTE: Creating a runnable to display results on UI thread was used twice,
+                        // so I refactored the code into displayResultsOnUIThread, defined at the bottom
+                        // of this file.  Should go in DownloadBase.java, but we are not submitting that file.
+                        displayResultsOnUIThread(path);
+                    }
+                }.execute(uri);
 
             break;
 
@@ -263,5 +280,9 @@ public class DownloadActivity extends DownloadBase {
     public boolean isBoundToAsync () {
     	return mDownloadRequest != null;
     }     
-    
+
+    public void displayResultsOnUIThread(final String path)
+    {
+
+    }
 }
