@@ -51,7 +51,9 @@ public class DownloadBoundServiceSync extends Service {
                 // download the file using the appropriate helper
                 // method in DownloadUtils and then return the
                 // pathname back to the client.
-                return DownloadUtils.downloadFile(getApplicationContext(), uri);
+                return DownloadUtils.downloadFile(
+                        DownloadBoundServiceSync.this,
+                        uri);
             }
 	};
 	

@@ -172,10 +172,42 @@ public class DownloadActivity extends DownloadBase {
             // Should be a few lines of code
             // Prof said to use MakeIntent factory method here, and bind to the service,
             // but this is done in OnStart()...
-            if (mDownloadCall != null)
+            if (mDownloadCall != null) {
                 Log.d(TAG,
                         "Invoke the twoway call in an AsyncTask");
 
+                /* SKNOTE - way to do it on the calling thread */
+
+                try {
+                    displayBitmap(mDownloadCall.downloadImage(uri));
+                } catch (RemoteException e1) {
+                    e1.printStackTrace();
+                }
+
+                /* SKNOTE: Prof's way of running on a separate thread */
+                /*
+                Runnable displayRunnable = new Runnable() {
+                    public void run() {
+                        try {
+                            // Download the image via a synchronous two-way method call.
+                            final String imagePath = mDownloadCall.downloadImage(uri);
+
+                            // Display the image on the UI Thread
+                            runOnUiThread(new Runnable() {
+                                public void run() {
+                                    displayBitmap(imagePath);
+                                }
+                            });
+                        } catch (RemoteException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                };
+                new Thread(displayRunnable).start();
+                */
+
+                /* SKNOTE: My attempt to do it on a separate AsyncTask thread */
+                /*
                 new AsyncTask<Uri, Void, String>() {
 
                     // Download the expanded acronym via a synchronous
@@ -198,7 +230,8 @@ public class DownloadActivity extends DownloadBase {
                         displayResultsOnUIThread(path);
                     }
                 }.execute(uri);
-
+                */
+            }
             break;
 
         case R.id.bound_async_button:
@@ -211,7 +244,7 @@ public class DownloadActivity extends DownloadBase {
 
                     // Invoke the oneway call, which doesn't block.
                     mDownloadRequest.downloadImage(uri,
-                            mDownloadCallback);
+                                                   mDownloadCallback);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -283,6 +316,12 @@ public class DownloadActivity extends DownloadBase {
 
     public void displayResultsOnUIThread(final String path)
     {
+        Runnable displayRunnable = new Runnable() {
+            public void run() {
+                displayBitmap(path);
+            }
+        };
 
+        runOnUiThread(displayRunnable);
     }
 }
