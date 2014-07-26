@@ -179,7 +179,8 @@ public class DownloadActivity extends DownloadBase {
                 /* SKNOTE - way to do it on the calling thread */
 
                 try {
-                    displayBitmap(mDownloadCall.downloadImage(uri));
+                    displayBitmap(
+                        mDownloadCall.downloadImage(uri));
                 } catch (RemoteException e1) {
                     e1.printStackTrace();
                 }
